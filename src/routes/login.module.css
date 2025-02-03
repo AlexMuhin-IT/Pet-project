@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    margin: 50px;
+    gap: 10px;
+}
+
+.loginItem {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.buttonLogin {
+    border: 2px solid red;
+    border-radius: 13px;
+    max-width: 150px;
+    padding: 0 10px;
+}
+
+.buttonLogin:hover {
+    color: white;
+    background-color: red;
+}
+
