@@ -15,7 +15,6 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as IndexImport } from './routes/index'
-import { Route as TodoIndexImport } from './routes/todo/index'
 
 // Create Virtual Routes
 
@@ -38,12 +37,6 @@ const LoginRoute = LoginImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const TodoIndexRoute = TodoIndexImport.update({
-  id: '/todo/',
-  path: '/todo/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -72,13 +65,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/todo/': {
-      id: '/todo/'
-      path: '/todo'
-      fullPath: '/todo'
-      preLoaderRoute: typeof TodoIndexImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -88,14 +74,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/about': typeof AboutLazyRoute
-  '/todo': typeof TodoIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/about': typeof AboutLazyRoute
-  '/todo': typeof TodoIndexRoute
 }
 
 export interface FileRoutesById {
@@ -103,15 +87,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/about': typeof AboutLazyRoute
-  '/todo/': typeof TodoIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/about' | '/todo'
+  fullPaths: '/' | '/login' | '/about'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/about' | '/todo'
-  id: '__root__' | '/' | '/login' | '/about' | '/todo/'
+  to: '/' | '/login' | '/about'
+  id: '__root__' | '/' | '/login' | '/about'
   fileRoutesById: FileRoutesById
 }
 
@@ -119,14 +102,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   AboutLazyRoute: typeof AboutLazyRoute
-  TodoIndexRoute: typeof TodoIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   AboutLazyRoute: AboutLazyRoute,
-  TodoIndexRoute: TodoIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -141,8 +122,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/login",
-        "/about",
-        "/todo/"
+        "/about"
       ]
     },
     "/": {
@@ -153,9 +133,6 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.lazy.tsx"
-    },
-    "/todo/": {
-      "filePath": "todo/index.tsx"
     }
   }
 }
