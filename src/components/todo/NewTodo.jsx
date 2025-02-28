@@ -1,23 +1,24 @@
 // import React from 'react';
 // import {useRef} from "react";
 import {useTodos} from '../../store.js'
-import {useRef} from "react";
+import {useState} from "react";
 
 
 const NewTodo = () => {
-    const ref = useRef()
+    const [inputValue, setInputValue] = useState('')
     const addTodo = useTodos((state) => state.addTodo)
 
     const handleAddTodo = () => {
-        // onClose()
-        addTodo(ref.current.value)
+        if (inputValue.trim()) {
+            addTodo(inputValue);
+            setInputValue('');
+        }
     }
     return (
         <>
             <input placeholder="Add a new todo..."
-                   ref={ref}
-                   onKeyDown={(e)=> e.key === 'Enter' && handleAddTodo }
-                   // onChange={handleAddTodo}
+                   value={inputValue}
+                   onChange={(e) => setInputValue(e.target.value)}
             />
             <button onClick={handleAddTodo}>Add Todos</button>
         </>
