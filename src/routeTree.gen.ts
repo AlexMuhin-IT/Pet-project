@@ -126,7 +126,7 @@ export const routeTree = rootRoute
       ]
     },
     "/": {
-      "filePath": "index.tsx"
+      "filePath": "index.jsx"
     },
     "/login": {
       "filePath": "login.tsx"

@@ -27,7 +27,6 @@ const TodoList = () => {
 };
 
 const Todo = React.memo(({id, title, completed}) => {
-    console.log("Rendering Todo")
     const toggleTodo = useTodos(state => state.toggleTodo)
 
     return (

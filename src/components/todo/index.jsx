@@ -1,3 +1,4 @@
+import React from "react";
 import { createFileRoute } from '@tanstack/react-router'
 import Filter from "./Filter.jsx";
 import TodoList from "./TodoList.jsx";
@@ -6,7 +7,6 @@ import NewTodo from "./NewTodo.jsx";
 
 
 
-// import React from "react";
 
 export function TodoIndex() {
   return <div>
