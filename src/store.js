@@ -1,5 +1,4 @@
 import {create} from 'zustand'
-import filter from "./components/todo/Filter.jsx";
 
 export const useTodos = create((set, get) => ({
      todos: [
@@ -17,7 +16,9 @@ export const useTodos = create((set, get) => ({
         set({todos: [...get().todos, newTodo]})
     },
     toggleTodo: (todoId) => set({
-        todos: get().todos.map(todo => todoId === todo.id ? {...todo, completed: !todo.completed} : todo),
+        todos: get().todos.map(todo => todoId === todo.id
+            ? {...todo, completed: !todo.completed}
+            : todo),
     }),
 
     setFilter: (filter)=>set({filter}),
