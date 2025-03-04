@@ -86,3 +86,30 @@ button:focus-visible {
     display: flex;
     justify-content: space-around;
 }
+.review-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+.review-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+.review-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+.review-card p {
+    color: #666;
+    margin: 10px 0;
+}
+.review-card .user {
+    font-size: 14px;
+    color: #999;
+}
