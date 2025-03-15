@@ -4,7 +4,6 @@ import axios from "axios";
 import {AuthContext} from "../../routes/__root.tsx";
 import {useNavigate} from "@tanstack/react-router";
 
-
 export const LoginContainer = () => {
 
 	const {login} = useContext(AuthContext)
