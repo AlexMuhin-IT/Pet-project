@@ -2,8 +2,14 @@
 import {Link, Outlet, createRootRoute} from '@tanstack/react-router'
 import {TanStackRouterDevtools} from '@tanstack/router-devtools'
 import {createContext, useState} from "react";
+import {AuthContextType} from "../components/Home/Home.tsx";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext<AuthContextType>({
+	isAuthenticated: false,
+	login: () => {},
+	logout: () => {},
+});
+// export const AuthContext = createContext()
 
 export const Route = createRootRoute({
 	component: RootComponent,
@@ -20,7 +26,7 @@ function RootComponent() {
 		}
 	}
 
-	const login = (token) => {
+	const login = (token: string) => {
 		localStorage.setItem('token', token)
 		setAuthenticated(true)
 	}

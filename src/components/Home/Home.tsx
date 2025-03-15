@@ -4,9 +4,22 @@ import {useContext, useEffect, useState} from "react";
 import {UserComp} from "./UserComp.tsx";
 import {AuthContext} from "../../routes/__root.tsx";
 
+export interface AuthContextType {
+	isAuthenticated: boolean;
+	login: (token: string)=>void,
+	logout: ()=>void,
+}
+
+export interface UserType {
+	id: number;
+	userName: string;
+	text: string;
+	isLoggedIn: boolean;
+}
+
 const Home = () => {
-	const {isAuthenticated} = useContext(AuthContext);
-	const [users, setUsers] = useState([]);
+	const {isAuthenticated} = useContext<AuthContextType>(AuthContext);
+	const [users, setUsers] = useState<UserType[]>([]);
 
 
 	useEffect(() => {

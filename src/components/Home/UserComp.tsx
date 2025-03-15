@@ -1,6 +1,11 @@
 // import React from 'react';
+import {UserType} from "./Home.tsx";
 
-export const UserComp = (props) => {
+interface UserCompProps {
+	user: UserType;
+}
+
+export const UserComp = (props:UserCompProps) => {
 	const {user} = props
 	return (
 		<li key={user.id} className="review-card">
