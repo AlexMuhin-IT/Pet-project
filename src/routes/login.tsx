@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
-import {LoginComponent} from "../pages/login/login.tsx";
+import {LoginContainer} from "../pages/login/LoginContainer.tsx";
 
 export const Route = createFileRoute('/login')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return <div><LoginComponent/></div>
+  return <div>    <LoginContainer/>  </div>
 }

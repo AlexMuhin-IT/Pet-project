@@ -1,30 +1,33 @@
 import { useForm } from 'react-hook-form'
 import s from './login.module.css'
-import { useState } from 'react'
+import {useState} from 'react'
 
-type LoginType = {
+
+type LoginProps = {
+  onSubmitHandler: (data: LoginType) => void
+}
+
+export type LoginType = {
   email: string
   password: string
 }
 
-export function LoginComponent() {
+export function Login({onSubmitHandler}: LoginProps) {
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm<LoginType>()
   const [isPasswordStrong, setIsPasswordStrong] = useState(false)
 
   const onSubmit = (data: LoginType) => {
-    console.log('data', data)
-    alert('Ваши данные улетели на сервер')
-    reset()
+    onSubmitHandler(data)
   }
 
   const validatePassword = (password: string) => {
     const strongPasswordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,10}$/i
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,20}$/i
     return strongPasswordRegex.test(password)
   }
 
@@ -43,10 +46,12 @@ export function LoginComponent() {
               className={s.loginItem}
               placeholder={'Введите почту'}
               type="email"
+              value = {'your_email@example.com'}
               {...register('email', {
                 required: 'Email is required',
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                  // value = {formData.email},
                   message: 'Please enter your email address',
                 },
               })}
@@ -57,10 +62,11 @@ export function LoginComponent() {
               className={s.loginItem}
               type="password"
               placeholder={'Введите пароль'}
+              value={'YourPasswo12!!'}
               {...register('password', {
                 required: 'Password is required',
                 pattern: {
-                  value: /^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,10}$/i,
+                  value: /^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,20}$/i,
                   message:
                     'Пароль должен содержать не менее 5 символов и обязательно должны быть: Заглавная буква A-Z, Цифра 0-9, и Спец символ',
                 },
@@ -72,7 +78,6 @@ export function LoginComponent() {
               <span style={{ color: 'green' }}>Пароль надежный</span>
             )}
             <button type="submit" className={s.buttonLogin}>
-              {' '}
               Login
             </button>
           </form>
