@@ -1,6 +1,6 @@
 // import React from 'react';
 
-import {useTodos} from "../../store.js";
+import {useTodos} from "../../app/store/store.tsx";
 
 const TotalTodos = () => {
 const count = useTodos(state => state.todos.length);

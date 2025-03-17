@@ -1,6 +1,4 @@
-// import React from 'react';
-// import {useRef} from "react";
-import {useTodos} from '../../store.js'
+import {useTodos} from '../../app/store/store.tsx'
 import {useState} from "react";
 
 

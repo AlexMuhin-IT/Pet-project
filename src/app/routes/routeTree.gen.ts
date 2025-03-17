@@ -12,22 +12,28 @@ import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as TodoImport } from './routes/todo'
-import { Route as LoginImport } from './routes/login'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from '../../pages/__root.tsx'
+import { Route as TodoImport } from '../../pages/todo/todo.tsx'
+import { Route as LoginImport } from '../../pages/login'
+import { Route as IndexImport } from '../../pages'
+import { Route as PostsImport } from '../../pages/post'
 
 // Create Virtual Routes
 
 const AboutLazyImport = createFileRoute('/about')()
 
 // Create/Update Routes
+const PostsRoute = PostsImport.update({
+  id: '/post',
+  path: '/post',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutLazyRoute = AboutLazyImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+} as any).lazy(() => import('../../pages/about/about.lazy.tsx').then((d) => d.Route))
 
 const TodoRoute = TodoImport.update({
   id: '/todo',
@@ -82,13 +88,14 @@ declare module '@tanstack/react-router' {
   }
 }
 
-// Create and export the route tree
+// Create and export the routes tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/todo': typeof TodoRoute
   '/about': typeof AboutLazyRoute
+  '/post': typeof PostsRoute
 }
 
 export interface FileRoutesByTo {
@@ -127,6 +134,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   TodoRoute: TodoRoute,
   AboutLazyRoute: AboutLazyRoute,
+  PostsRoute: PostsRoute,
 }
 
 export const routeTree = rootRoute
@@ -149,7 +157,7 @@ export const routeTree = rootRoute
       "filePath": "index.tsx"
     },
     "/login": {
-      "filePath": "login.tsx"
+      "filePath": "index.tsx"
     },
     "/todo": {
       "filePath": "todo.tsx"

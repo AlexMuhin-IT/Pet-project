@@ -1,8 +1,8 @@
 // import React from 'react';
-import '../../app.css'
-import {useTodos} from "../../store.js";
+import '../../app/app.css'
+import {useTodos} from "../../app/store/store.tsx";
 
-const Filter = () => {
+const FilterTodo = () => {
     const {filter, setFilter} = useTodos()
     return (
         <div className='filterContainer m-6 '>
@@ -23,4 +23,4 @@ const Filter = () => {
     );
 };
 
-export default Filter;
+export default FilterTodo;

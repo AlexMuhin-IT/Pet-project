@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import {TodoIndex} from "../pages/todo/";
+import {TodoIndex} from "./index.tsx";
 
 export const Route = createFileRoute('/todo')({
   component: RouteComponent,

@@ -1,5 +1,6 @@
 import React from 'react';
-import {useTodos} from '../../store.js'
+import {TodoType, useTodos} from '../../app/store/store.tsx'
+
 
 const useFilteredTodos = () => {
     const todos = useTodos((state) => state.todos);
@@ -26,7 +27,7 @@ const TodoList = () => {
     )
 };
 
-const Todo = React.memo(({id, title, completed}) => {
+const Todo = React.memo(({id, title, completed}:TodoType) => {
     const toggleTodo = useTodos(state => state.toggleTodo)
 
     return (

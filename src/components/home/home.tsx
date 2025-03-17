@@ -1,13 +1,15 @@
 // import React, { useEffect, useState } from 'react';
 
 import {useContext, useEffect, useState} from "react";
-import {UserComp} from "./UserComp.tsx";
-import {AuthContext} from "../../routes/__root.tsx";
+import {UserComp} from "./userComp.tsx";
+import {AuthContext} from "../../pages/__root.tsx";
+import {Login} from "../../pages/login/login.tsx";
+import {Posts} from "../../pages/post/posts.tsx";
 
 export interface AuthContextType {
 	isAuthenticated: boolean;
-	login: (token: string)=>void,
-	logout: ()=>void,
+	login: (token: string) => void,
+	logout: () => void,
 }
 
 export interface UserType {
@@ -37,7 +39,7 @@ const Home = () => {
 					}
 				});
 				if (!response.ok) {
-					throw new Error('Network response was not ok');
+					new Error('Network response was not ok');
 				}
 				const data = await response.json();
 				setUsers(data);
@@ -53,16 +55,15 @@ const Home = () => {
 	return (
 		<div>
 			<h1>Список пользователей:</h1>
-			<ul className="review-list">
+			<ul >
 				{isAuthenticated ? (
-					<div>{users.map(user => (
-						<UserComp key={user.id} user={user}/>
-					))}
+					<div className="review-list">{users.map(user => (
+							<UserComp key={user.id} user={user}/>))}
 					</div>
-				) : (
-					<span> 'Нужно авторизоваться'</span>)
+					): (<Login/>)
 				}
 			</ul>
+			{isAuthenticated ? <Posts/> : null}
 		</div>
 	);
 };

@@ -1,15 +1,11 @@
-// import React from "react";
-import Filter from "./Filter.tsx";
-import TodoList from "./TodoList.tsx";
-import TotalTodos from "./TotalTodos.tsx";
-import NewTodo from "./NewTodo.tsx";
-
-
-
+import FilterTodo from "../../components/todo/filterTodo.tsx";
+import TodoList from "../../components/todo/todoList.tsx";
+import TotalTodos from "../../components/todo/totalTodos.tsx";
+import NewTodo from "../../components/todo/newTodo.tsx";
 
 export const TodoIndex = () => {
   return <div>
-      <Filter/>
+      <FilterTodo/>
       <TodoList/>
       <TotalTodos/>
       <NewTodo/>

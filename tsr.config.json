@@ -1,0 +1,3 @@
+{
+  "virtualRouteConfig": "./src/app/routes/routeTree.gen.ts"
+}

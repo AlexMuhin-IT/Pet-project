@@ -2,7 +2,7 @@
 import {Link, Outlet, createRootRoute} from '@tanstack/react-router'
 import {TanStackRouterDevtools} from '@tanstack/router-devtools'
 import {createContext, useState} from "react";
-import {AuthContextType} from "../components/Home/Home.tsx";
+import {AuthContextType} from "../components/home/home.tsx";
 
 export const AuthContext = createContext<AuthContextType>({
 	isAuthenticated: false,
@@ -49,6 +49,9 @@ function RootComponent() {
 						</li>
 						<li>
 							<Link to="/todo" activeProps={activeProps}> Todolist </Link>
+						</li>
+						<li>
+							<Link to="/post" activeProps={activeProps}> Posts </Link>
 						</li>
 					</ul>
 				</div>
