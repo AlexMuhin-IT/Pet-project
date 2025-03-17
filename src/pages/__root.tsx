@@ -9,7 +9,6 @@ export const AuthContext = createContext<AuthContextType>({
 	login: () => {},
 	logout: () => {},
 });
-// export const AuthContext = createContext()
 
 export const Route = createRootRoute({
 	component: RootComponent,
@@ -25,7 +24,6 @@ function RootComponent() {
 			fontWeight: 'bold',
 		}
 	}
-
 	const login = (token: string) => {
 		localStorage.setItem('token', token)
 		setAuthenticated(true)
@@ -41,6 +39,9 @@ function RootComponent() {
 				<div>
 					<ul className="headerContainer">
 						<li>
+							<Link to="/login" activeProps={activeProps}> Логин </Link>
+						</li>
+						<li>
 							<Link to="/" activeProps={activeProps}> Home </Link>
 						</li>
 						<li>
@@ -48,9 +49,6 @@ function RootComponent() {
 						</li>
 						<li>
 							<Link to="/todo" activeProps={activeProps}> Todolist </Link>
-						</li>
-						<li>
-							<Link to="/login" activeProps={activeProps}> Логин </Link>
 						</li>
 					</ul>
 				</div>

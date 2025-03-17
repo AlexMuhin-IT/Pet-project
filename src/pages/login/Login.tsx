@@ -1,18 +1,16 @@
 import { useForm } from 'react-hook-form'
 import s from './login.module.css'
-import {useState} from 'react'
-
-
-type LoginProps = {
-  onSubmitHandler: (data: LoginType) => void
-}
+import {useContext, useState} from 'react'
+import axios from "axios";
+import {AuthContext} from "../__root.tsx";
+import {useNavigate} from "@tanstack/react-router";
 
 export type LoginType = {
   email: string
   password: string
 }
 
-export function Login({onSubmitHandler}: LoginProps) {
+export function Login() {
   const {
     register,
     handleSubmit,
@@ -21,8 +19,26 @@ export function Login({onSubmitHandler}: LoginProps) {
   } = useForm<LoginType>()
   const [isPasswordStrong, setIsPasswordStrong] = useState(false)
 
-  const onSubmit = (data: LoginType) => {
-    onSubmitHandler(data)
+  const {login} = useContext(AuthContext)
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: LoginType) => {
+      try {
+        const response = await axios.post('http://localhost:5000/api/auth/login',
+          {
+            email: data.email,
+            password: data.password
+          })
+        if (!response.data.token) {
+          throw new Error('Token not found in response');
+        }
+        login(response.data.token)
+        navigate({to: '/'})
+      } catch (error) {
+        console.log('Ошибка при получении данных:', error);
+        alert('Ошибка при входе. Проверьте email и пароль.');
+      }
+    // }
   }
 
   const validatePassword = (password: string) => {
