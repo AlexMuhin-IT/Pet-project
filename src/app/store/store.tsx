@@ -1,6 +1,7 @@
 import {create} from 'zustand'
 import FilterTodo from "../../components/todo/filterTodo.tsx";
 
+
 export interface TodoType {
 	id: number
 	title: string;
@@ -41,30 +42,4 @@ export const useTodos = create<Store>((set, get) => ({
 	}),
 	setFilter: (filter) => set({filter}),
 
-}))
-export type PostType = {
-	userId?: number,
-	id: number,
-	title: string,
-	body: string,
-}
-type PostsType = {
-	posts: PostType[],
-}
-type ActionPostType = {
-	fetchData: () => void,
-}
-type usePostsType = PostsType & ActionPostType
-
-export const useDataPosts = create<usePostsType>((set) => ({
-	posts: [],
-	fetchData: async () => {
-		try {
-			const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-			const data = await res.json();
-			set({posts: data})
-		} catch (error) {
-			console.error('Ошибка при загрузке данных:', error);
-		}
-	}
 }))
