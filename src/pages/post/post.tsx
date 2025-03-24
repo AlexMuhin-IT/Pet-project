@@ -6,7 +6,7 @@ export const Post = (props:PostType) => {
 
 	return (
 		<li className="border-10 rounded-lg border-green-600 max-w-3xs max-h-full bg-green-100">
-			<div className="border-2 border-red-600 pb-4 font-bold m-8">{title}</div>
+			<div className="border-2 border-red-600 pb-4 font-bold m-8 text-center">{title}</div>
 			<span className="">{body}</span>
 		</li>
 	);
