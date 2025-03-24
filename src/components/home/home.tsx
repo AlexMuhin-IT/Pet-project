@@ -54,15 +54,18 @@ const Home = () => {
 	// @ts-ignore
 	return (
 		<div>
-			<h1>Список пользователей:</h1>
-			<ul >
-				{isAuthenticated ? (
-					<div className="review-list">{users.map(user => (
+
+			{isAuthenticated ? (
+				<>
+					<h1 className="m-auto flex justify-center gap-10 text-4xl text-black-200 bg-green-200 mb-4">Список пользователей:</h1>
+					<ul>
+						<div className="review-list">{users.map(user => (
 							<UserComp key={user.id} user={user}/>))}
-					</div>
-					): (<Login/>)
-				}
-			</ul>
+						</div>
+					</ul>
+				</>
+			) : (<Login/>)
+			}
 			{isAuthenticated ? <Posts/> : null}
 		</div>
 	);

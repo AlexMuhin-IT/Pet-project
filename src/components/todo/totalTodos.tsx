@@ -6,7 +6,7 @@ const TotalTodos = () => {
 const count = useTodos(state => state.todos.length);
 	return (
 		<div>
-			<span>Count: {count}</span>
+			<span className="ml-2 font-bold"> Count: <symbol className="text-red-400">{count}</symbol></span>
 		</div>
 	);
 };

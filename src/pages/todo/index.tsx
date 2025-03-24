@@ -6,8 +6,8 @@ import NewTodo from "../../components/todo/newTodo.tsx";
 export const TodoIndex = () => {
   return <div>
       <FilterTodo/>
+      <NewTodo/>
       <TodoList/>
       <TotalTodos/>
-      <NewTodo/>
   </div>
 }
