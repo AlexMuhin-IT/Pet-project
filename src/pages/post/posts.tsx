@@ -1,46 +1,31 @@
 import {Post} from "./post.tsx";
 import {useQuery} from '@tanstack/react-query';
-import axios from "axios";
+import {getPosts} from "../../app/api/posts";
 
 export const Posts = () => {
 
-	const fetchPosts = async () => {
-		const {data} = await axios.get('https://jsonplaceholder.typicode.com/posts');
-		return data;
-	};
-
-	const {data, error, isLoading} = useQuery<PostType[], Error>({
+	const {data, error, isLoading} = useQuery({
 		queryKey: ['posts'],
-		queryFn: fetchPosts
+		queryFn: () => getPosts()
 	});
 
+	if (isLoading) return <div>Loading...</div>;
 	if (error) return <div>Error loading data</div>;
 
 	return (
 		<div>
-			<h1>Список постов:</h1>
-			{(isLoading) ?
-				<div>Loading...</div>
-				: <ul>
-					{/*{isAuthenticated && (*/}
-					<div className="review-list">
-						{data && Array.isArray(data) ? (
-							data?.map(post => (
-								<Post key={post.id} {...post} />
-							))
-						) : (<div>No data available</div>)}
-					</div>
-				</ul>}
+			<h1 className="m-8 text-6xl">Список постов:</h1>
+			<ul className="m-8 grid grid-cols-6 gap-2">
+				{/*<div >*/}
+				{data?.map(post => (
+					<Post key={post.id} {...post}  />
+				))}
+				{/*</div>*/}
+			</ul>
 		</div>
 	);
 };
 
-export type PostType = {
-	userId?: number,
-	id: number,
-	title: string,
-	body: string,
-};
 
 
 
