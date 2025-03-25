@@ -1,66 +1,36 @@
-// import React, { useEffect, useState } from 'react';
-
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {UserComp} from "./userComp.tsx";
 import {AuthContext} from "../../pages/__root.tsx";
 import {Login} from "../../pages/login/login.tsx";
 import {Posts} from "../../pages/post/posts.tsx";
+import {useQuery} from "@tanstack/react-query";
+import {getHomeList} from "../../app/api/home/getHomeList.tsx";
+import {AuthContextType} from "../../app/api/home/type/type.ts";
 
-export interface AuthContextType {
-	isAuthenticated: boolean;
-	login: (token: string) => void,
-	logout: () => void,
-}
 
-export interface UserType {
-	id: number;
-	userName: string;
-	text: string;
-	isLoggedIn: boolean;
-}
-
-const Home = () => {
+export const HomePage = () => {
 	const {isAuthenticated} = useContext<AuthContextType>(AuthContext);
-	const [users, setUsers] = useState<UserType[]>([]);
 
+	const {data, error, isLoading} = useQuery({
+		queryKey: ['home'],
+		queryFn: () => getHomeList()
+	});
+	console.log('data', data)
 
-	useEffect(() => {
-		// Функция для получения данных с сервера
-		const fetchUsers = async () => {
-			const token = localStorage.getItem("token");
-			if (!token) {
-				return
-			}
-			try {
-				const response = await fetch('http://localhost:5000/api/users', {
-					method: "GET",
-					headers: {
-						'Authorization': `Bearer ${token}`
-					}
-				});
-				if (!response.ok) {
-					new Error('Network response was not ok');
-				}
-				const data = await response.json();
-				setUsers(data);
-			} catch (error) {
-				console.error('Ошибка при получении данных:', error);
-			}
-		};
+	if (isLoading) return <div>Loading...</div>;
+	if (error) return <div>Error loading data</div>;
 
-		fetchUsers();
-	}, []);
-
-	// @ts-ignore
 	return (
 		<div>
 
 			{isAuthenticated ? (
 				<>
-					<h1 className="m-auto flex justify-center gap-10 text-4xl text-black-200 bg-green-200 mb-4">Список пользователей:</h1>
+					<h1 className="m-auto flex justify-center gap-10 text-4xl text-black-200 bg-green-200 mb-4">Список
+						пользователей:</h1>
 					<ul>
-						<div className="review-list">{users.map(user => (
-							<UserComp key={user.id} user={user}/>))}
+						<div className="flex items-center justify-center">
+							{data?.map(user => (
+								<UserComp key={user.id} user={user}/>))}
 						</div>
 					</ul>
 				</>
@@ -70,5 +40,3 @@ const Home = () => {
 		</div>
 	);
 };
-
-export default Home;

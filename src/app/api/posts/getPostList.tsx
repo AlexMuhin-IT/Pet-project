@@ -4,6 +4,5 @@ import {PostType} from "./type/type.ts";
 export const getPosts = async () => {
 
 	const response:AxiosResponse<PostType[]> = await axios.get('https://jsonplaceholder.typicode.com/posts');
-	console.log(response);
 	return response.data;
 };
