@@ -1,1 +1,1 @@
-export {getHome} from './getHomeList.tsx'
+export {getHomeList} from './getHomeList.tsx'

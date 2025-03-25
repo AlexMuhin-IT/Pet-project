@@ -18,7 +18,7 @@ const TodoList = () => {
     const filteredTodos = useFilteredTodos()
 
     return (
-        <div className="bg-red-600">
+        <div>
             {filteredTodos?.map((todo) => (
                 <Todo key={todo.id} {...todo}/>
             ))}
@@ -31,11 +31,11 @@ const Todo = React.memo(({id, title, completed}:TodoType) => {
     const toggleTodo = useTodos(state => state.toggleTodo)
 
     return (
-        <div className="bg-green-600">
+        <div className="ml-8">
             <input type='checkbox'
                    checked={completed}
                    onChange={() => toggleTodo(id)}/>
-            <span className="ml-2 font-bold">{title}</span>
+            <span className="m-4 font-bold">{title}</span>
         </div>
     )
 })

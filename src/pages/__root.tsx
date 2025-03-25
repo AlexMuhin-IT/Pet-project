@@ -2,7 +2,7 @@
 import {createRootRoute, Link, Outlet} from '@tanstack/react-router'
 import {TanStackRouterDevtools} from '@tanstack/router-devtools'
 import {createContext, useState} from "react";
-import {AuthContextType} from "../components/home/home.tsx";
+import {AuthContextType} from "../app/api/home/type/type.ts";
 
 export const AuthContext = createContext<AuthContextType>({
 	isAuthenticated: false,

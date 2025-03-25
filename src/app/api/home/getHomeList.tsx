@@ -2,6 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import {UserType} from "./type/type.ts";
 
 export const getHomeList = async (): Promise<UserType[]> => {
+
 	const token = localStorage.getItem("token");
 
 	const response: AxiosResponse<UserType[]> = await axios.get('http://localhost:5000/api/users', {
@@ -11,5 +12,4 @@ export const getHomeList = async (): Promise<UserType[]> => {
 		}
 	});
 	return response.data
-
 }

@@ -1,5 +1,6 @@
 // import React from 'react';
-import {UserType} from "./home.tsx";
+
+import {UserType} from "../../app/api/home/type/type.ts";
 
 interface UserCompProps {
 	user: UserType;
